@@ -227,6 +227,15 @@ class Tag:
             for path in tag_page_paths:
                 content.append(f"    ../{path}")
 
+            content.append("")
+            content.append(".. minigallery::")
+            content.append("")
+            for path in tag_page_paths:
+                rst_path = Path(path)
+                gallery_path = rst_path.relative_to("generated/gallery/")
+                gallery_path = str(gallery_path.parent / gallery_path.stem)
+                content.append(f"    {gallery_path}")
+
         content.append("")
         with open(
             os.path.join(srcdir, tags_output_dir, filename), "w", encoding="utf8"
